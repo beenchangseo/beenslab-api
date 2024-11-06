@@ -1,9 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
-import { Post } from '@prisma/client';
 import { GetBlogPostRequestDto } from './dto/blog.request.dto';
 import { GetAllBlogPostResponseDto, GetBlogPostResponseDto } from './dto/blog.response.dto';
-import { title } from 'process';
 
 @Injectable()
 export class BlogService {
@@ -28,9 +26,10 @@ export class BlogService {
 
         const getAllBlogPostResponseDtos: GetAllBlogPostResponseDto[] = blogs.map((blog) => {
             return {
+                id: blog.id,
                 title: blog.title,
                 description: blog.description,
-                categories: blog.PostOnCategory.map((item) => item.category.title),
+                categories: blog.PostOnCategory.map((item) => item.category.keyword),
                 update_time: blog.update_time,
             };
         });
@@ -40,7 +39,7 @@ export class BlogService {
 
     async getBlogPost(getBlogPostRequestDto: GetBlogPostRequestDto): Promise<GetBlogPostResponseDto> {
         const blog = await this.prismaService.post.findFirst({
-            where: { title: getBlogPostRequestDto.title },
+            where: { id: getBlogPostRequestDto.id },
             include: {
                 PostOnCategory: {
                     include: {
@@ -64,7 +63,7 @@ export class BlogService {
             title: blog.title,
             description: blog.description,
             tags: blog.tags,
-            categories: blog.PostOnCategory.map((item) => item.category.title),
+            categories: blog.PostOnCategory.map((item) => item.category.keyword),
             contents: blog.contents,
             update_time: blog.update_time,
         };

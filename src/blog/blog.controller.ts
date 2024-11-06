@@ -19,8 +19,6 @@ export class BlogController {
         
         const post = await this.blogService.getBlogPost(params);
 
-        console.log(`controller post, ${post}`);
-
         return { data: post };
     }
 }

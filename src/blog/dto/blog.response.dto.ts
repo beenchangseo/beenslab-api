@@ -2,6 +2,9 @@ import { IsArray, IsDate, IsString, IsUUID } from 'class-validator';
 
 export class GetAllBlogPostResponseDto {
     @IsString()
+    id: string
+
+    @IsString()
     title: string;
 
     @IsString()
