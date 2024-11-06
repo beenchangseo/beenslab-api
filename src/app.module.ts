@@ -3,6 +3,7 @@ import { ConfigModule } from '@nestjs/config';
 import { BlogModule } from './blog/blog.module';
 import { CategoryModule } from './category/category.module';
 import { PrismaModule } from './prisma/prisma.module';
+import { SitemapModule } from './sitemap/sitemap.module';
 
 @Module({
     imports: [
@@ -12,6 +13,7 @@ import { PrismaModule } from './prisma/prisma.module';
         PrismaModule,
         BlogModule,
         CategoryModule,
+        SitemapModule,
     ],
     controllers: [],
     providers: [],
