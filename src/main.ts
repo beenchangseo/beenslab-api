@@ -13,6 +13,6 @@ async function bootstrap() {
         exposedHeaders: ['x-session-expired'], // 노출할 헤더를 지정
     });
 
-    await app.listen(3001);
+    await app.listen(4000);
 }
 bootstrap();
