@@ -16,7 +16,6 @@ export class BlogController {
 
     @Get('post')
     async getBlogPost(@Query() params: GetBlogPostRequestDto): Promise<{ data: GetBlogPostResponseDto }> {
-        
         const post = await this.blogService.getBlogPost(params);
 
         return { data: post };

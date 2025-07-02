@@ -2,15 +2,24 @@ import { ConflictException, Injectable, InternalServerErrorException, NotFoundEx
 import { PrismaService } from '../prisma/prisma.service';
 import { Category, Prisma } from '@prisma/client';
 import { CreateCategoryDto, DeleteCategoryDto, UpdateCategoryDto } from './category.dto';
+import { GetCategoryResponseDto } from './dto/category.response.dto';
 
 @Injectable()
 export class CategoryService {
     constructor(private readonly prismaService: PrismaService) {}
 
-    async getAll(): Promise<Category[]> {
+    async getAll(): Promise<GetCategoryResponseDto[]> {
         const categories = await this.prismaService.category.findMany();
 
-        return categories;
+        const GetAllCategoriesResponseDto: GetCategoryResponseDto[] = categories.map((category) => {
+            return {
+                id: category.id,
+                title: category.title,
+                keyword: category.keyword,
+            };
+        });
+
+        return GetAllCategoriesResponseDto;
     }
 
     async create(createCategoryDto: CreateCategoryDto): Promise<Category> {

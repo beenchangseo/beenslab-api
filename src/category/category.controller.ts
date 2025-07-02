@@ -1,13 +1,14 @@
-import { Body, Controller, Get, Post, Query } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 import { CategoryService } from './category.service';
 import { CreateCategoryDto, DeleteCategoryDto, UpdateCategoryDto } from './category.dto';
+import { GetCategoryResponseDto } from './dto/category.response.dto';
 
 @Controller('category')
 export class CategoryController {
     constructor(private readonly categoryService: CategoryService) {}
 
     @Get('list')
-    async getAll(@Query() query: any) {
+    async getAll(): Promise<{ data: GetCategoryResponseDto[] }> {
         const categories = await this.categoryService.getAll();
 
         return { data: categories };
