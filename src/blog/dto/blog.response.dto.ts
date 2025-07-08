@@ -5,6 +5,9 @@ export class GetAllBlogPostResponseDto {
     id: string;
 
     @IsString()
+    slug: string;
+
+    @IsString()
     title: string;
 
     @IsString()
@@ -20,6 +23,9 @@ export class GetAllBlogPostResponseDto {
 export class GetBlogPostResponseDto {
     @IsUUID()
     user_id: string;
+
+    @IsString()
+    slug: string;
 
     @IsString()
     title: string;

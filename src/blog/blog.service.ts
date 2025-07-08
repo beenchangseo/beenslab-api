@@ -27,6 +27,7 @@ export class BlogService {
         const getAllBlogPostResponseDtos: GetAllBlogPostResponseDto[] = blogs.map((blog) => {
             return {
                 id: blog.id,
+                slug: blog.slug,
                 title: blog.title,
                 description: blog.description,
                 categories: blog.PostOnCategory.map((item) => item.category.keyword),
@@ -39,7 +40,7 @@ export class BlogService {
 
     async getBlogPost(getBlogPostRequestDto: GetBlogPostRequestDto): Promise<GetBlogPostResponseDto> {
         const blog = await this.prismaService.post.findFirst({
-            where: { id: getBlogPostRequestDto.id },
+            where: { slug: getBlogPostRequestDto.slug },
             include: {
                 PostOnCategory: {
                     include: {
@@ -60,6 +61,7 @@ export class BlogService {
 
         const getBlogPostResponseDto: GetBlogPostResponseDto = {
             user_id: blog.user_id,
+            slug: blog.slug,
             title: blog.title,
             description: blog.description,
             tags: blog.tags,
