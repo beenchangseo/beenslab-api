@@ -31,38 +31,37 @@ model OauthClient {
 }
 
 model Category {
-  id      String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  keyword String @unique
+  id      String           @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  keyword String           @unique
   title   String
-
-  posts PostOnCategory[]
+  posts   PostOnCategory[]
 
   @@map("category")
 }
 
 model Post {
-  id          String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  user_id     String   @db.Uuid
-  title       String   @unique
-  description String
-  tags        String[]
-  contents    String
-  update_time DateTime @default(now())
-
+  id             String           @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  slug           String?          @default("")
+  user_id        String           @db.Uuid
+  title          String           @unique
+  description    String
+  tags           String[]
+  contents       String
+  update_time    DateTime         @default(now())
   user           User             @relation(fields: [user_id], references: [id])
   PostOnCategory PostOnCategory[]
 
+  @@index([slug])
   @@map("post")
 }
 
 model PostOnCategory {
-  id          String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  post_id     String @db.Uuid
-  category_id String @db.Uuid
+  id          String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  post_id     String   @db.Uuid
+  category_id String   @db.Uuid
+  category    Category @relation(fields: [category_id], references: [id])
+  post        Post     @relation(fields: [post_id], references: [id])
 
-  post     Post     @relation(fields: [post_id], references: [id])
-  category Category @relation(fields: [category_id], references: [id])
-
-  @@unique([post_id, category_id]) // 각 조합이 유일하도록 설정
-  @@map("post_on_category") // 테이블 이름 지정
+  @@unique([post_id, category_id])
+  @@map("post_on_category")
 }
