@@ -8,8 +8,11 @@ export class LoggerMiddleware implements NestMiddleware {
     constructor() {}
 
     use(request: Request, response: Response, next: NextFunction) {
-        const { ip, method, originalUrl } = request;
+        const { method, originalUrl } = request;
         const userAgent = request.get('user-agent') || '';
+
+        const forwarded = request.headers['x-forwarded-for'];
+        const ip = typeof forwarded === 'string' ? forwarded.split(',')[0].trim() : request.ip;
 
         response.on('finish', () => {
             const { statusCode } = response;
