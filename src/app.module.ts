@@ -5,6 +5,7 @@ import { CategoryModule } from './category/category.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { SitemapModule } from './sitemap/sitemap.module';
 import { LoggerMiddleware } from './middleware/logger.middleware';
+import { FirebaseModule } from './firebase/firebase.module';
 
 @Module({
     imports: [
@@ -15,6 +16,7 @@ import { LoggerMiddleware } from './middleware/logger.middleware';
         BlogModule,
         CategoryModule,
         SitemapModule,
+        FirebaseModule,
     ],
     controllers: [],
     providers: [],

@@ -1,11 +1,15 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
-import { GetBlogPostRequestDto } from './dto/blog.request.dto';
+import { GetBlogPostRequestDto, GetBlogVisitCounterRequestDto } from './dto/blog.request.dto';
 import { GetAllBlogPostResponseDto, GetBlogPostResponseDto } from './dto/blog.response.dto';
+import { FirebaseService } from '../firebase/firebase.service';
 
 @Injectable()
 export class BlogService {
-    constructor(private readonly prismaService: PrismaService) {}
+    constructor(
+        private readonly prismaService: PrismaService,
+        private readonly firebaseService: FirebaseService,
+    ) {}
 
     async getAll(): Promise<GetAllBlogPostResponseDto[]> {
         const blogs = await this.prismaService.post.findMany({
@@ -71,5 +75,13 @@ export class BlogService {
         };
 
         return getBlogPostResponseDto;
+    }
+
+    async getBlogVisitCounterHtml(params: GetBlogVisitCounterRequestDto): Promise<string> {
+        const postId = params.post_id;
+        const domain = params.domain;
+        const html = await this.firebaseService.getBlogVisitCounterHtml(postId, domain);
+
+        return html;
     }
 }
