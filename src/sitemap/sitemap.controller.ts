@@ -20,33 +20,33 @@ export class SitemapController {
                     <loc>${this.configService.get<string>('FRONTEND_SERVER_DOMAIN')}</loc>
                     <lastmod>2025-01-01T04:26:19.620Z</lastmod>
                     <changefreq>daily</changefreq>
-                    <priority>1.0</priority>
+                    <priority>0.7</priority>
                 </url>
                 <url>
                     <loc>${this.configService.get<string>('FRONTEND_SERVER_DOMAIN')}/blog</loc>
                     <lastmod>2025-01-01T04:26:19.620Z</lastmod>
                     <changefreq>daily</changefreq>
-                    <priority>1.0</priority>
+                    <priority>0.7</priority>
                 </url>
                 <url>
                     <loc>${this.configService.get<string>('FRONTEND_SERVER_DOMAIN')}/category</loc>
                     <lastmod>2025-01-01T04:26:19.620Z</lastmod>
                     <changefreq>daily</changefreq>
-                    <priority>1.0</priority>
+                    <priority>0.7</priority>
                 </url>
                 <url>
                     <loc>${this.configService.get<string>('FRONTEND_SERVER_DOMAIN')}/career</loc>
                     <lastmod>2025-01-01T04:26:19.620Z</lastmod>
                     <changefreq>daily</changefreq>
-                    <priority>1.0</priority>
+                    <priority>0.7</priority>
                 </url>
             ${posts
                 .map(
                     (post) => `
                 <url>
                     <loc>${this.configService.get<string>('FRONTEND_SERVER_DOMAIN')}/blog/post/${post.slug}</loc>
-                    <lastmod>${new Date(post.update_time).toISOString()}</lastmod>
-                    <changefreq>daily</changefreq>
+                    <lastmod>2025-08-12T12:34:56+09:00</lastmod>
+                    <changefreq>weekly</changefreq>
                     <priority>1.0</priority>
                 </url>
                 `,
