@@ -13,7 +13,7 @@ export class BlogService {
 
     async getAll(): Promise<GetAllBlogPostResponseDto[]> {
         const blogs = await this.prismaService.post.findMany({
-            orderBy: { update_time: 'desc' },
+            orderBy: { create_time: 'desc' },
             include: {
                 PostOnCategory: {
                     include: {
