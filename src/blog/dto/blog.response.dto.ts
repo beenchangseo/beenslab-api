@@ -18,6 +18,9 @@ export class GetAllBlogPostResponseDto {
 
     @IsDate()
     update_time: Date;
+
+    @IsDate()
+    create_time: Date;
 }
 
 export class GetBlogPostResponseDto {
@@ -44,4 +47,7 @@ export class GetBlogPostResponseDto {
 
     @IsDate()
     update_time: Date;
+
+    @IsDate()
+    create_time: Date;
 }

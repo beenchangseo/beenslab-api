@@ -3,7 +3,6 @@ import { ConfigModule } from '@nestjs/config';
 import { BlogModule } from './blog/blog.module';
 import { CategoryModule } from './category/category.module';
 import { PrismaModule } from './prisma/prisma.module';
-import { SitemapModule } from './sitemap/sitemap.module';
 import { LoggerMiddleware } from './middleware/logger.middleware';
 import { FirebaseModule } from './firebase/firebase.module';
 
@@ -15,7 +14,6 @@ import { FirebaseModule } from './firebase/firebase.module';
         PrismaModule,
         BlogModule,
         CategoryModule,
-        SitemapModule,
         FirebaseModule,
     ],
     controllers: [],

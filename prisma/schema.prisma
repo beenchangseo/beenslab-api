@@ -47,7 +47,9 @@ model Post {
   description    String
   tags           String[]
   contents       String
+  create_time    DateTime         @default(now())
   update_time    DateTime         @default(now())
+  delete_time    DateTime?
   user           User             @relation(fields: [user_id], references: [id])
   PostOnCategory PostOnCategory[]
 

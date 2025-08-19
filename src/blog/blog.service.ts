@@ -36,6 +36,7 @@ export class BlogService {
                 description: blog.description,
                 categories: blog.PostOnCategory.map((item) => item.category.keyword),
                 update_time: blog.update_time,
+                create_time: blog.create_time,
             };
         });
 
@@ -72,6 +73,7 @@ export class BlogService {
             categories: blog.PostOnCategory.map((item) => item.category.keyword),
             contents: blog.contents,
             update_time: blog.update_time,
+            create_time: blog.create_time,
         };
 
         return getBlogPostResponseDto;

@@ -35,11 +35,13 @@ CREATE TABLE "category" (
 -- CreateTable
 CREATE TABLE "post" (
     "id" UUID NOT NULL DEFAULT gen_random_uuid(),
+    "slug" TEXT DEFAULT '',
     "user_id" UUID NOT NULL,
     "title" TEXT NOT NULL,
     "description" TEXT NOT NULL,
     "tags" TEXT[],
     "contents" TEXT NOT NULL,
+    "create_time" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "update_time" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "post_pkey" PRIMARY KEY ("id")
@@ -67,6 +69,9 @@ CREATE UNIQUE INDEX "category_keyword_key" ON "category"("keyword");
 CREATE UNIQUE INDEX "post_title_key" ON "post"("title");
 
 -- CreateIndex
+CREATE INDEX "post_slug_idx" ON "post"("slug");
+
+-- CreateIndex
 CREATE UNIQUE INDEX "post_on_category_post_id_category_id_key" ON "post_on_category"("post_id", "category_id");
 
 -- AddForeignKey
@@ -77,4 +82,3 @@ ALTER TABLE "post_on_category" ADD CONSTRAINT "post_on_category_category_id_fkey
 
 -- AddForeignKey
 ALTER TABLE "post_on_category" ADD CONSTRAINT "post_on_category_post_id_fkey" FOREIGN KEY ("post_id") REFERENCES "post"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
